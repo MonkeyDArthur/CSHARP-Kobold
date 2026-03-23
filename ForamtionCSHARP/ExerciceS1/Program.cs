@@ -58,12 +58,12 @@ namespace ExerciceS1
                 int a, b;
                 do
                 {
-                    Console.WriteLine("Saisir le premier nombre :");
+                    Console.Write("Saisir le premier nombre : ");
                     input = Console.ReadLine();
                 } while (!int.TryParse(input, out a));
                 do
                 {
-                    Console.WriteLine("Saisir le second nombre :");
+                    Console.Write("Saisir le second nombre : ");
                     input = Console.ReadLine();
                 } while (!int.TryParse(input, out b));
 
