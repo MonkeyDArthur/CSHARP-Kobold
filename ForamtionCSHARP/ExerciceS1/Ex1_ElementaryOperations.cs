@@ -8,58 +8,40 @@ namespace Serie_I
 {
     public static class ElementaryOperations
     {
-        public static void BasicOperation(int a, int b, char operation)
+        public static void BasicOperation(int a, int b, char ope)
         {
-            int resultat;
-            if (operation == '+')
+            switch (ope)
             {
-                resultat = a + b;
-                Console.WriteLine($"{a} {operation} {b} = {resultat}");
-            }
-            else if (operation == '-')
-            {
-                resultat = a - b;
-                Console.WriteLine($"{a} {operation} {b} = {resultat}");
-            }
-            else
-            {
-                Console.WriteLine($"{a} {operation} {b} = Opération invalide");
+                case '+': Console.WriteLine($"{a} {ope} {b} = {a + b}"); break;
+                case '-': Console.WriteLine($"{a} {ope} {b} = {a - b}"); break;
+                case '*': Console.WriteLine($"{a} {ope} {b}  = {a * b}"); break;
+                case '/':
+                    if (b == 0) { Console.WriteLine($"{a} {ope} {b} = Opération invalide"); }
+                    else { Console.WriteLine($"{a} / {b} = {(double)a / b}"); }
+                    break;
+                default: Console.WriteLine($"{a} {ope} {b} = Opération invalide"); break;
             }
         }
 
         public static void IntegerDivision(int a, int b)
         {
-            int q, r;
-            if (b == 0)
-            {
-                Console.WriteLine($"{a} : {b} = Opération invalide");
-            }
+            if (b == 0) { Console.WriteLine($"{a} : {b} = Opération invalide"); }
             else
             {
-                r = a % b;
-                q = a / (b - r);
-                if (r == 0)
-                {
-                    Console.WriteLine($"{a} = {q} * {b}");
-                }
-                else
-                {
-                    Console.WriteLine($"{a} = {q} * {b} + {r}");
-                }
+                int r = a % b;
+                int q = a / b;
+                if (r == 0) { Console.WriteLine($"{a} = {q} * {b}"); }
+                else { Console.WriteLine($"{a} = {q} * {b} + {r}"); }
             }
 
         }
 
         public static void Pow(int a, int b)
-        {
-            int resultat;
-            if (b < 0)
-            {
-                Console.WriteLine($"{a} ^ {b} = Opération invalide");
-            }
+        { 
+            if (b < 0) { Console.WriteLine($"{a} ^ {b} = Opération invalide"); }
             else
             {
-                resultat = a ^ b;
+                int resultat = a ^ b;
                 Console.WriteLine($"{a} ^ {b} = {resultat}");
             }
         }

@@ -10,14 +10,15 @@ namespace Serie_I
     {
         public static int Pgcd(int a, int b)
         {
-            //TODO
-            return -1;
-        }
-
-        public static int PgcdRecursive(int a, int b)
-        {
-            //TODO
-            return -1;
+            a = Math.Abs(a);
+            b = Math.Abs(b);
+            while (b != 0)
+            {
+                int r = a % b;
+                a = b;
+                b = r;
+            }
+            return a;
         }
     }
 }
