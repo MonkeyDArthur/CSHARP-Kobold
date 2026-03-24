@@ -14,6 +14,7 @@ namespace ExerciceS1
     {
         public static void Main(string[] args)
         {
+            /*
             Console.WriteLine("Exercice I SI - Opérations élémentaires");
                 //Opérations de base
                 Serie_I.ElementaryOperations.BasicOperation(3, 4, '+');
@@ -72,6 +73,7 @@ namespace ExerciceS1
 
                 Console.WriteLine($"PGCD de {a} et {b} : {Serie_I.Euclide.Pgcd(a, b)}");
             
+            */
             Console.WriteLine("\n\nExercice I SII - elier autour des tableaux");
                 int [] tab1 =  {-1, 4, 7, 12, -6, 5};
                 int resultat1 = Serie_II.TasksTables.SumTab(tab1);
@@ -80,8 +82,8 @@ namespace ExerciceS1
                 foreach (int item in tab1) { Console.Write($"{item}, "); }
                 Console.Write($"]\nSomme : {resultat1}");
                 
-                b = 2; char ope = '+';
-                int[] resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, b);
+                int c = 2; char ope = '+';
+                int[] resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, c);
                 Console.WriteLine("Opération sur un tableau : ");
                 Console.Write("Tableau : [");
                 foreach (int item in tab1) { Console.Write($"{item}, "); }
@@ -91,7 +93,7 @@ namespace ExerciceS1
                 Console.Write($"]");
 
                 ope = '-';
-                int[] resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, b);
+                resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, c);
                 Console.WriteLine("Opération sur un tableau : ");
                 Console.Write("Tableau : [");
                 foreach (int item in tab1) { Console.Write($"{item}, "); }
@@ -101,16 +103,16 @@ namespace ExerciceS1
                 Console.Write($"]");
 
                 ope = '*';
-                int[] resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, b);
+                resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, c);
                 Console.WriteLine("Opération sur un tableau : ");
                 Console.Write("Tableau : [");
                 foreach (int item in tab1) { Console.Write($"{item}, "); }
-                Console.Write($"]\nOperateur : {ope} {b}\n");
+                Console.Write($"]\nOperateur : {ope} {c}\n");
                 Console.Write("resultat : [");
                 foreach (int item in resultat2) { Console.Write($"{item}, "); }
                 Console.Write($"]");
 
-                int tab2 = {-2, 8};
+                int[] tab2 = {-2, 8};
                 int[] resultat3 = Serie_II.TasksTables.ConcatTab(tab1, tab2);
                 Console.WriteLine("Concarénation de deux tableux :");
                 Console.WriteLine($"Tab1 : {tab1}");

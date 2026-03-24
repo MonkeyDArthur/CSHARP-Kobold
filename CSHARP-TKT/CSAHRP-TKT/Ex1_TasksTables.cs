@@ -23,14 +23,14 @@ namespace Serie_II
                 case '+': for (int i = 0; i < tab.Length; i++) { resultat[i] = tab[i] + b; } break;
                 case '-': for (int i = 0; i < tab.Length; i++) { resultat[i] = tab[i] - b; } break;
                 case '*': for (int i = 0; i < tab.Length; i++) { resultat[i] = tab[i] * b; } break;
-                default: resultat = null;
+                default: resultat = null; break;
             }
             return resultat;
         }
 
         public static int[] ConcatTab(int[] tab1, int[] tab2)
         {
-            int [] resultat = tab1.Concat(tab2)
+            int[] resultat = new int[5];
             return resultat;
         }
     }
