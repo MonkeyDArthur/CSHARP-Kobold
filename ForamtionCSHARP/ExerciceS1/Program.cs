@@ -1,9 +1,12 @@
-﻿using Serie_I;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Serie_I;
+using Serie_II;
+
 
 namespace ExerciceS1
 {
