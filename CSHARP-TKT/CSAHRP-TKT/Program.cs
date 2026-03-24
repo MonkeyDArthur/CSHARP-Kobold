@@ -51,14 +51,13 @@ namespace ExerciceS1
 
             //EXECICE 4 SERIE I
             Console.WriteLine("\n\nExercice IV SI - Factorielle");
-            int number; string input;
             do
             {
                 Console.WriteLine("Saisir un nombre");
-                input = Console.ReadLine();
-            }   while (!int.TryParse(input, out number));
-            Console.WriteLine($"Factorielle de {number} : {Factorial.Factorial_(number)}");
-            Console.WriteLine($"Factorielle de {number} : {Factorial.FactorialRecursive(number)} [R]");
+                input_str = Console.ReadLine();
+            }   while (!int.TryParse(input_str, out input_int));
+            Console.WriteLine($"Factorielle de {input_int} : {Factorial.Factorial_(input_int)}");
+            Console.WriteLine($"Factorielle de {input_int} : {Factorial.FactorialRecursive(input_int)} [R]");
 
             //EXECICE 5 SERIE I
             Console.WriteLine("\n\nExercice V SI - Les nombres premiers");
@@ -71,12 +70,12 @@ namespace ExerciceS1
             {
                 Console.Write("Saisir le premier nombre : ");
                 input_str = Console.ReadLine();
-            }   while (!int.TryParse(input, out a));
+            }   while (!int.TryParse(input_str, out a));
             do
             {
                 Console.Write("Saisir le second nombre : ");
                 input_str = Console.ReadLine();
-            }   while (!int.TryParse(input, out b));
+            }   while (!int.TryParse(input_str, out b));
             Console.WriteLine($"PGCD de {a} et {b} : {Serie_I.Euclide.Pgcd(a, b)}");
             
 
@@ -90,28 +89,25 @@ namespace ExerciceS1
             Console.WriteLine("Resultat : [" + string.Join(", ", resultat1) + "]");
             Console.WriteLine();
 
-            int c = 2; char ope;
-            ope = '+';
-            int[] resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, c);
+            int c = 2;
+            int[] resultat2 = Serie_II.TasksTables.OpeTab(tab1, '+', c);
             Console.WriteLine("Opération sur un tableau : ");
             Console.WriteLine("Tableau   : [" + string.Join(", ", tab1) + "]");
-            Console.WriteLine($"Operateur : {ope} {c}");
+            Console.WriteLine($"Operateur : + {c}");
             Console.WriteLine("Resultat  : [" + string.Join(", ", resultat2) + "]");
             Console.WriteLine();
 
-            ope = '-';
-            resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, c);
+            resultat2 = Serie_II.TasksTables.OpeTab(tab1, '-', c);
             Console.WriteLine("Opération sur un tableau : ");
             Console.WriteLine("Tableau   : [" + string.Join(", ", tab1) + "]");
-            Console.WriteLine($"Operateur : {ope} {c}");
+            Console.WriteLine($"Operateur : - {c}");
             Console.WriteLine("Resultat  : [" + string.Join(", ", resultat2) + "]");
             Console.WriteLine();
 
-            ope = '*';
-            resultat2 = Serie_II.TasksTables.OpeTab(tab1, ope, c);
+            resultat2 = Serie_II.TasksTables.OpeTab(tab1, '*', c);
             Console.WriteLine("Opération sur un tableau : ");
             Console.WriteLine("Tableau   : [" + string.Join(", ", tab1) + "]");
-            Console.WriteLine($"Operateur : {ope} {c}");
+            Console.WriteLine($"Operateur : * {c}");
             Console.WriteLine("Resultat  : [" + string.Join(", ", resultat2) + "]");
             Console.WriteLine();
 
@@ -213,7 +209,6 @@ namespace ExerciceS1
             int[][] resultatE4S2 = Serie_II.Matrice.BuildingMatrix(vecteur1, vecteur2);
             Console.WriteLine("Resultat :"); Serie_II.Matrice.AffMatrice(resultatE4S2);
             Console.WriteLine();
-
             resultatE4S2 = Serie_II.Matrice.BuildingMatrix(vecteur1, vecteur3);
             Console.WriteLine("Resultat :"); Serie_II.Matrice.AffMatrice(resultatE4S2);
             Console.WriteLine();
@@ -225,7 +220,6 @@ namespace ExerciceS1
             resultatE4S2 = Serie_II.Matrice.AddSous(matrice1, matrice2, '+');
             Console.WriteLine("Resultat :"); Serie_II.Matrice.AffMatrice(resultatE4S2);
             Console.WriteLine();
-
             resultatE4S2 = Serie_II.Matrice.AddSous(matrice1, matrice2, '-');
             Console.WriteLine("Resultat :"); Serie_II.Matrice.AffMatrice(resultatE4S2);
             Console.WriteLine();
@@ -247,13 +241,13 @@ namespace ExerciceS1
             int[] resultatE5S2 = Serie_II.CribleErastosthne.EratosthenesSieve(input_int);
             Console.WriteLine($"Nb premiers jusqu'à {input_int} : [" + string.Join(", ", resultatE5S2) + "]");
             Console.WriteLine();
-
+            
 
             //EXECICE 6 SERIE II
             Console.WriteLine("\n\nExercice VI SII - QCM");
 
-
-
+            QCM[] QCM = Serie_II.QCM.chargementQCM();
+            Serie_II.QCM.AskQuestions(QCM);
             Console.ReadKey();
         }
     }
