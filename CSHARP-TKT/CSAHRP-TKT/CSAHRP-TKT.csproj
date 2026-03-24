@@ -43,15 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ex1_ElementaryOperations.cs" />
-    <Compile Include="Ex1_TasksTables.cs" />
-    <Compile Include="Ex2_Morpion.cs" />
-    <Compile Include="Ex2_SpeakingClock.cs" />
-    <Compile Include="Ex3_Pyramid.cs" />
-    <Compile Include="Ex3_Search.cs" />
-    <Compile Include="Ex4_Factorial.cs" />
-    <Compile Include="Ex5_PrimeNumbers.cs" />
-    <Compile Include="Ex6_Euclide.cs" />
+    <Compile Include="S2_Ex6_QCM.cs" />
+    <Compile Include="S2_Ex5_CribleErastosthne.cs" />
+    <Compile Include="S2_Ex4_Matrice.cs" />
+    <Compile Include="S1_Ex1_ElementaryOperations.cs" />
+    <Compile Include="S2_Ex1_TasksTables.cs" />
+    <Compile Include="S2_Ex2_Morpion.cs" />
+    <Compile Include="S1_Ex2_SpeakingClock.cs" />
+    <Compile Include="S1_Ex3_Pyramid.cs" />
+    <Compile Include="S2_Ex3_Search.cs" />
+    <Compile Include="S1_Ex4_Factorial.cs" />
+    <Compile Include="S1_Ex5_PrimeNumbers.cs" />
+    <Compile Include="S1_Ex6_Euclide.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -30,8 +30,7 @@ namespace Serie_II
 
         public static int[] ConcatTab(int[] tab1, int[] tab2)
         {
-            int[] resultat = new int[5];
-            return resultat;
+            return tab1.Concat(tab2).ToArray();
         }
     }
 }
