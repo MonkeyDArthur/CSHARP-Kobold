@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Reflection.Emit;
 
+//Q1 : Etant donnée que le decalage de la lettre est de 3, le choix d'un dictionnaire est pertinent pour stocker l'alphabet Morse, car plus rapide pour les recherche que les autres structures
+
 namespace Serie_III
 {
     public class Morse
