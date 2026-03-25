@@ -17,7 +17,6 @@ namespace Serie_II
         public string[] Reponse;
         public int Solution;
         public int Poids;
-
         public static bool QcmValidity(QCM qcm)
         {
             if (qcm.Reponse == null || qcm.Reponse.Length == 0) return false;
@@ -31,7 +30,6 @@ namespace Serie_II
 
             Console.WriteLine(qcm.Question);
             for (int i = 0; i < qcm.Reponse.Length; i++) { Console.WriteLine($"{i + 1}. {qcm.Reponse[i]}"); }
-            
             int reponseJoueur;
             while (true)
             {
@@ -63,7 +61,6 @@ namespace Serie_II
             }
             Console.WriteLine($"Résultats du questionnaire : {scoreTotal} / {scoreMax}");
         }
-
         public static QCM[] chargementQCM()
         {
             QCM[] QCM = new QCM[] {

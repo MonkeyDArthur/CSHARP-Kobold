@@ -13,7 +13,6 @@ namespace Serie_III
         public static void EliminateSeditiousThoughts(string texte, string[] liste)
         {
             string texteCensure = texte;
-
             for(int i = 0; i < liste.Length; i++)
             {
                 int taille = liste[i].Length;

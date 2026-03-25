@@ -10,8 +10,7 @@ namespace Serie_I
     {
         public static int Pgcd(int a, int b)
         {
-            a = Math.Abs(a);
-            b = Math.Abs(b);
+            a = Math.Abs(a); b = Math.Abs(b);
             while (b != 0)
             {
                 int r = a % b;

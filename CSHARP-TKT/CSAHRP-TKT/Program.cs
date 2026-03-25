@@ -327,6 +327,23 @@ namespace ExerciceS1
             Console.WriteLine($"Il y a {nbLettre} lettres dans la phrase.");
             int nbMot = Serie_III.Morse.WordsCount(Texte);
             Console.WriteLine($"Il y a {nbMot} mots dans la phrase.");
+            string traduction = Serie_III.Morse.MorseTranslation(Texte);
+            Console.WriteLine($"Traduction de la phrase V1: {traduction}");
+            Console.WriteLine();
+
+            Texte = "===..=.===..=....===.===..===...===.=..=....=......===.===...===.===.===...=.===.=...=.=.=...=";
+            Console.WriteLine($"Texte de départ: {Texte}");
+            traduction = Serie_III.Morse.EfficientMorseTranslation(Texte);
+            Console.WriteLine($"Traduction de la phrase V2: {traduction}");
+
+            Texte = "Nikolai ou as tu cache mes dollars Je dois aller a l ouest Larmee mappelle pour aller en Afghanistan";
+            Console.WriteLine($"Texte de départ: {Texte}");
+            Texte = Serie_III.Morse.MorseEncryption(Texte);
+            Console.WriteLine($"Traduction en morse: {Texte}");
+            traduction = Serie_III.Morse.MorseTranslation(Texte);
+            Console.WriteLine($"Traduction de la phrase V1: {traduction}");
+            traduction = Serie_III.Morse.EfficientMorseTranslation(Texte);
+            Console.WriteLine($"Traduction de la phrase V2: {traduction}");
 
             Console.ReadKey();
         }

@@ -22,7 +22,6 @@ namespace Serie_I
                 default: Console.WriteLine($"{a} {ope} {b} = Opération invalide"); break;
             }
         }
-
         public static void IntegerDivision(int a, int b)
         {
             if (b == 0) { Console.WriteLine($"{a} : {b} = Opération invalide"); }
@@ -35,7 +34,6 @@ namespace Serie_I
             }
 
         }
-
         public static void Pow(int a, int b)
         { 
             if (b < 0) { Console.WriteLine($"{a} ^ {b} = Opération invalide"); }

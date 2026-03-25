@@ -25,10 +25,7 @@ namespace Serie_III
             string msgCoder = "";
             foreach (char c in aCoder)
             {
-                if (cesarTable.ContainsKey(c)) 
-                { 
-                    lettreCoder = cesarTable[c];
-                }
+                if (cesarTable.ContainsKey(c)) { lettreCoder = cesarTable[c]; }
                 else { lettreCoder = c; }
                 msgCoder += lettreCoder;
             }

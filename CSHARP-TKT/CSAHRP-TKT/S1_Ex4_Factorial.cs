@@ -13,16 +13,14 @@ namespace Serie_I
         public static int Factorial_(int n)
         {
             int resultat = 1;
-            if (n == 0) { resultat = 1; }
-            else { for (int i = 1; i <= n; i++) { resultat *= i; } }
+            if (n == 0) { resultat = 1; } else { for (int i = 1; i <= n; i++) { resultat *= i; } }
             return resultat;
         }
 
         public static int FactorialRecursive(int n)
         {
             int resultat = 1;
-            if (n == 0) { return resultat; }
-            else { return n * FactorialRecursive(n - 1); }
+            if (n == 0) { return resultat; } else { return n * FactorialRecursive(n - 1); }
         }
     }
 }

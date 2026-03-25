@@ -24,7 +24,6 @@ namespace Serie_II
                 }
             }
         }
-
         public static int[][] BuildingMatrix(int[] leftVector, int[] rightVector)
         {
             Console.WriteLine("Création de matrice avec 2 vecteurs");
@@ -44,7 +43,6 @@ namespace Serie_II
             }
             return res;
         }
-        
         public static int[][] AddSous(int[][] leftMatrix, int[][] rightMatrix, char ope)
         {
             Console.WriteLine($"Addition ou soustraction de 2 matrices : {ope}");
@@ -68,7 +66,6 @@ namespace Serie_II
             }
             return res;
         }
-
         public static int[][] Multiplication(int[][] leftMatrix, int[][] rightMatrix)
         {
             Console.WriteLine($"Multiplication de 2 matrices :");

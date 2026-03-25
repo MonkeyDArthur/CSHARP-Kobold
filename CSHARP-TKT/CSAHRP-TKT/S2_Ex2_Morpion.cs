@@ -23,7 +23,6 @@ namespace Serie_II
                 if (i != 2) { Console.WriteLine("-----"); }
             }
         }
-
         public static int CheckMorpion(char[,] grille, char type)
         {
             int avance = 0;
@@ -37,7 +36,6 @@ namespace Serie_II
             }
             if (grille[0, 0] == type & grille[1, 1] == type & grille[2, 2] == type) { return 1; }
             if (grille[0, 2] == type & grille[1, 1] == type & grille[2, 0] == type) { return 1; }
-
             for ( int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++) { if (grille[i, j] != ' ') { avance += 1; } }

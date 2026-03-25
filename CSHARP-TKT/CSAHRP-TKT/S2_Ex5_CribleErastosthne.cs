@@ -16,16 +16,10 @@ namespace Serie_II
 
             for (int i = 2; i * i <= n; i++)
             {
-                if (estPremier[i])
-                {
-                    for (int j = i * i; j <= n; j += i) { estPremier[j] = false; }
-                }
+                if (estPremier[i]) { for (int j = i * i; j <= n; j += i) { estPremier[j] = false; } }
             }
             List<int> res = new List<int>();
-            for (int i = 2; i <= n; i++)
-            {
-                if (estPremier[i] == true) { res.Add(i); }
-            }
+            for (int i = 2; i <= n; i++) { if (estPremier[i] == true) { res.Add(i); } }
             return res.ToArray();
         }
     }

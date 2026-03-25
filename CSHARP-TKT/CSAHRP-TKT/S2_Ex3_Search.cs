@@ -13,13 +13,9 @@ namespace Serie_II
     {
         public static int LinearSearch(int[] tableau, int valeur)
         {
-            for (int i = 0; i < tableau.Length; i++)
-            {
-                if (tableau[i] == valeur) { return i; }
-            }
+            for (int i = 0; i < tableau.Length; i++) { if (tableau[i] == valeur) { return i; } }
             return -1;
         }
-
         public static int BinarySearch(int[] tableau, int valeur)
         {
             int min = 0; int max = tableau.Length - 1; int nbBoucle = 0;

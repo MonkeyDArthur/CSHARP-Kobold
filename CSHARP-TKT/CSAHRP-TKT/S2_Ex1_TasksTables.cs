@@ -14,7 +14,6 @@ namespace Serie_II
             foreach (int item in tab) { resultat += item; }
             return resultat;
         }
-
         public static int[] OpeTab(int[] tab, char ope, int b)
         {
             int[] resultat = new int[tab.Length];
@@ -27,7 +26,6 @@ namespace Serie_II
             }
             return resultat;
         }
-
         public static int[] ConcatTab(int[] tab1, int[] tab2)
         {
             return tab1.Concat(tab2).ToArray();

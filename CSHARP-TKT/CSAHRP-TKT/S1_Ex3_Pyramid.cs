@@ -26,17 +26,8 @@ namespace Serie_I
                     if (j % 2 == 0) { c = '-'; }
                     else { c = '+'; }
                 }
-
-                for (int i = 0; i < espace; i++)
-                {
-                    Console.Write(" ");
-                }
-
-                for (int i = 0; i < bloc; i++)
-                {
-                    Console.Write(c);
-                }
-
+                for (int i = 0; i < espace; i++) { Console.Write(" "); }
+                for (int i = 0; i < bloc; i++) { Console.Write(c); }
                 Console.WriteLine();
             }
         }
