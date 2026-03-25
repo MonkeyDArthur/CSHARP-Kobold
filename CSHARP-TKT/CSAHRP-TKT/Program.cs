@@ -15,7 +15,7 @@ namespace ExerciceS1
         public static void Main(string[] args)
         {
             string input_str; int input_int;
-            
+            /*
             //EXECICE 1 SERIE I
             Console.WriteLine("Exercice I SI - Opérations élémentaires");
             
@@ -198,6 +198,7 @@ namespace ExerciceS1
             if (resultatE3S2 != -1) { Console.WriteLine($"La valeur {valeur} a été trouvée en position {resultatE3S2 + 1}."); }
             else { Console.WriteLine($"La valeur {valeur} n'a pas été trouvée, soit elle n'est pas dans la liste soit la liste est vide."); }
             Console.WriteLine();
+            
 
             //EXECICE 4 SERIE II
             Console.WriteLine("\n\nExercice IV SII - Matrice");
@@ -230,6 +231,14 @@ namespace ExerciceS1
             Console.WriteLine("Resultat :"); Serie_II.Matrice.AffMatrice(resultatE4S2);
             Console.WriteLine();
 
+            int[][] matrice5 = {    new int[] {-1,-4,0,1,3,7},
+                                    new int[] {-2,-8,0,2,6,14},
+                                    new int[] {-3,-12,0,3,9,21},
+                                    new int[] {-5,-20,0,5,15,35},
+                                    new int[] {-6,-24,0,6,18,42},
+                                    new int[] {-7,-24,0,7,18,20} };
+            Console.WriteLine("Resultat :"); Serie_II.Matrice.AffMatrice(matrice5);
+
             //EXECICE 5 SERIE II
             Console.WriteLine("\n\nExercice V SII - Crible d'Eratosthène");
             
@@ -248,6 +257,77 @@ namespace ExerciceS1
 
             QCM[] QCM = Serie_II.QCM.chargementQCM();
             Serie_II.QCM.AskQuestions(QCM);
+            */
+
+            //EXECICE 1 SERIE III
+            Console.WriteLine("\n\nExercice I SIII - Traitement Administratif");
+
+            string Texte = "Nikolai, où as-tu caché mes dollars ? Je dois aller à l'ouest ! L'armée m'appelle pour aller en Afghanistan.";
+            string[] motInterdit = { "dollars", "regan", "afghanistan", "ouest", "crime", "défaite" };
+            Serie_III.TraitementString.EliminateSeditiousThoughts(Texte, motInterdit);
+            Console.WriteLine();
+
+            string Id1 = "M.  Burak       ARTI        26";
+            string Id2 = "Mme Anna        POLOSKA     28";
+            string Id3 = "Mr  Guillaume   DERANGER    25";
+            string Id4 = "M.  Aubin       LAGARDE     xx";
+            string Id5 = "M.  3630        TAMERE      26";
+            string Id6 = "M.  Corentin    3630        26";
+            string Id7 = "M.   Burak       ARTI        26";
+
+            bool estOK = Serie_III.TraitementString.ControlFormat(Id1);
+            if (estOK) { Console.WriteLine($"{Id1}\nFormat OK"); } else { Console.WriteLine($"{Id1}\nFormat KO"); }
+            estOK = Serie_III.TraitementString.ControlFormat(Id2);
+            if (estOK) { Console.WriteLine($"{Id2}\nFormat OK"); } else { Console.WriteLine($"{Id2}\nFormat KO"); }
+            estOK = Serie_III.TraitementString.ControlFormat(Id3);
+            if (estOK) { Console.WriteLine($"{Id3}\nFormat OK"); } else { Console.WriteLine($"{Id3}\nFormat KO"); }
+            estOK = Serie_III.TraitementString.ControlFormat(Id4);
+            if (estOK) { Console.WriteLine($"{Id4}\nFormat OK"); } else { Console.WriteLine($"{Id4}\nFormat KO"); }
+            estOK = Serie_III.TraitementString.ControlFormat(Id5);
+            if (estOK) { Console.WriteLine($"{Id5}\nFormat OK"); } else { Console.WriteLine($"{Id5}\nFormat KO"); }
+            estOK = Serie_III.TraitementString.ControlFormat(Id6);
+            if (estOK) { Console.WriteLine($"{Id6}\nFormat OK"); } else { Console.WriteLine($"{Id6}\nFormat KO"); }
+            estOK = Serie_III.TraitementString.ControlFormat(Id7);
+            if (estOK) { Console.WriteLine($"{Id7}\nFormat OK"); } else { Console.WriteLine($"{Id7}\nFormat KO"); }
+            Console.WriteLine();
+
+            Texte = "2026-03-25 : Nikolai, où as-tu caché mes dollars ? Je dois aller à l'ouest le 2026-04-05 ! L'armée m'appelle pour aller en Afghanistan pour le 2026-04-20.";
+            Console.WriteLine($"Texte de départ  : {Texte}");
+            Texte = Serie_III.TraitementString.ChangeDate(Texte);
+            Console.WriteLine($"Texte de modifié : {Texte}");
+            Console.WriteLine();
+
+            //EXECICE 2 SERIE III
+            Console.WriteLine("\n\nExercice II SIII - Code César");
+
+            Console.WriteLine("Codage Cesar");
+            Texte = "Nikolai, où as-tu caché mes dollars ? Je dois aller à l'ouest ! L'armée m'appelle pour aller en Afghanistan.";
+            Console.WriteLine($"Texte de départ: {Texte}");
+            Texte = Serie_III.CodeCesar.CesarCode(Texte);
+            Console.WriteLine($"Texte coder    : {Texte}");
+            Texte = Serie_III.CodeCesar.DecryptCesarCode(Texte);
+            Console.WriteLine($"Texte decoder  : {Texte}");
+            Console.WriteLine();
+
+            Console.WriteLine("Codage Cesar avec décalage de X");
+            Texte = "Nikolai, où as-tu caché mes dollars ? Je dois aller à l'ouest ! L'armée m'appelle pour aller en Afghanistan.";
+            Console.WriteLine($"Texte de départ: {Texte}");
+            Texte = Serie_III.CodeCesar.GeneralCesarCode(Texte,5);
+            Console.WriteLine($"Texte coder    : {Texte}");
+            Texte = Serie_III.CodeCesar.GeneralDecryptCesarCode(Texte,5);
+            Console.WriteLine($"Texte decoder  : {Texte}");
+            Console.WriteLine();
+
+            //EXECICE 3 SERIE III
+            Console.WriteLine("\n\nExercice III SIII - Morse");
+
+            Texte = "=.===.=.=...=.....===.===...===.===.===...===.=...===.....=.=.=...=.===...=.=...===.=...===.....===.===...=.=...===.=.===.=...=.=.=.=...=...=.===.=.=";
+            Console.WriteLine($"Texte de départ: {Texte}");
+            int nbLettre = Serie_III.Morse.LettersCount(Texte);
+            Console.WriteLine($"Il y a {nbLettre} lettres dans la phrase.");
+            int nbMot = Serie_III.Morse.WordsCount(Texte);
+            Console.WriteLine($"Il y a {nbMot} mots dans la phrase.");
+
             Console.ReadKey();
         }
     }

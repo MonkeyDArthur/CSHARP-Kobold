@@ -15,11 +15,12 @@ namespace Serie_II
             {
                 for (int i = 0; i < matrice.Length; i++)
                 {
-                    for (int j = 0; j < matrice[i].Length; j++) 
+                    Console.Write("| ");
+                    for (int j = 0; j < matrice[i].Length; j++)
                     { 
-                        Console.Write(string.Join(", ", matrice[i][j]) + "\t");
+                        Console.Write(string.Join(",", matrice[i][j]).PadLeft(5, ' '));
                     }
-                    Console.WriteLine();
+                    Console.WriteLine(" |");
                 }
             }
         }
@@ -27,8 +28,8 @@ namespace Serie_II
         public static int[][] BuildingMatrix(int[] leftVector, int[] rightVector)
         {
             Console.WriteLine("Création de matrice avec 2 vecteurs");
-            Console.WriteLine("Vecteur 1 : [" + string.Join(", ", leftVector) + "]");
-            Console.WriteLine("Vecteur 2 : [" + string.Join(", ", rightVector) + "]");
+            Console.WriteLine("Vecteur 1 : |" + string.Join(", ", leftVector) + "|");
+            Console.WriteLine("Vecteur 2 : |" + string.Join(", ", rightVector) + "|");
             if (leftVector.Length != rightVector.Length) { return null; }
             
             int taille = leftVector.Length;
