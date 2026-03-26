@@ -41,6 +41,6 @@ namespace Serie_II
                 for (int j = 0; j < 3; j++) { if (grille[i, j] != ' ') { avance += 1; } }
             }
             if (avance == 9) { return 0; } else { return -1; }
-        }                
+        }
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Serie_I;
 using Serie_II;
+using Serie_III;
+using Serie_IV;
 
 
 namespace ExerciceS1
@@ -257,7 +261,7 @@ namespace ExerciceS1
 
             QCM[] QCM = Serie_II.QCM.chargementQCM();
             Serie_II.QCM.AskQuestions(QCM);
-            */
+            
 
             //EXECICE 1 SERIE III
             Console.WriteLine("\n\nExercice I SIII - Traitement Administratif");
@@ -336,7 +340,7 @@ namespace ExerciceS1
             traduction = Serie_III.Morse.EfficientMorseTranslation(Texte);
             Console.WriteLine($"Traduction de la phrase V2: {traduction}");
 
-            Texte = "Nikolai ou as tu cache mes dollars Je dois aller a l ouest Larmee mappelle pour aller en Afghanistan";
+            Texte = "NIQUEZ VOUS JE MEN BATS LES COUILLES EN GUILLAUME TES UNE MERDE";
             Console.WriteLine($"Texte de départ: {Texte}");
             Texte = Serie_III.Morse.MorseEncryption(Texte);
             Console.WriteLine($"Traduction en morse: {Texte}");
@@ -344,6 +348,57 @@ namespace ExerciceS1
             Console.WriteLine($"Traduction de la phrase V1: {traduction}");
             traduction = Serie_III.Morse.EfficientMorseTranslation(Texte);
             Console.WriteLine($"Traduction de la phrase V2: {traduction}");
+
+            //EXECICE 1 SERIE IV
+            Console.WriteLine("\n\nExercice I SIV - Conseil de Classe");
+            Directory.SetCurrentDirectory(@"C:\Users\Formation\Desktop\");
+            string cheminEntree = "fileEntree.txt";
+            string cheminSortie = "fileSortie.txt";
+            Serie_IV.ConseilClasse.SchoolMeans(cheminEntree, cheminSortie);
+            Console.WriteLine();
+
+            //EXECICE 2 SERIE IV
+            Console.WriteLine("\n\nExercice II SIV - Morpion");
+            Serie_IV.Morpion.MorpionGame();
+            Console.WriteLine();
+            */
+
+            //EXECICE 3 SERIE IV
+            Console.WriteLine("\n\nExercice III SIV - Contact téléphonique");
+            PhoneBook pageJaune = new PhoneBook();
+            pageJaune.DisplayPhoneBook();
+            Console.WriteLine();
+
+            Console.WriteLine(pageJaune.IsValidPhoneNumber("0612345678"));
+            Console.WriteLine(pageJaune.IsValidPhoneNumber("00612345678"));
+            Console.WriteLine(pageJaune.IsValidPhoneNumber("0061234567"));
+            Console.WriteLine();
+
+
+            pageJaune.AddPhoneNumber("0612345678", "Lucas");
+            pageJaune.AddPhoneNumber("0678452391", "Emma");
+            pageJaune.AddPhoneNumber("0623984756", "Noah");
+            pageJaune.AddPhoneNumber("0691827364", "Lina");
+            pageJaune.AddPhoneNumber("0654738291", "Hugo");
+            pageJaune.AddPhoneNumber("0638291745", "Chloé");
+            pageJaune.AddPhoneNumber("0683749201", "Nathan");
+            pageJaune.AddPhoneNumber("0648291736", "Sarah");
+            pageJaune.AddPhoneNumber("0671928345", "Yanis");
+            pageJaune.AddPhoneNumber("0628471935", "Inès");
+            pageJaune.DisplayPhoneBook();
+            Console.WriteLine();
+
+            Console.WriteLine(pageJaune.ContainsPhoneContact("0623984756"));
+            pageJaune.PhoneContact("0623984756");
+            Console.WriteLine(pageJaune.DeletePhoneNumber("0623984756"));
+            Console.WriteLine();
+
+            pageJaune.DisplayPhoneBook();
+            Console.WriteLine();
+
+
+
+
 
             Console.ReadKey();
         }
