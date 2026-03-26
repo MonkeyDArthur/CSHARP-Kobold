@@ -361,7 +361,6 @@ namespace ExerciceS1
             Console.WriteLine("\n\nExercice II SIV - Morpion");
             Serie_IV.Morpion.MorpionGame();
             Console.WriteLine();
-            */
 
             //EXECICE 3 SERIE IV
             Console.WriteLine("\n\nExercice III SIV - Contact téléphonique");
@@ -395,8 +394,34 @@ namespace ExerciceS1
 
             pageJaune.DisplayPhoneBook();
             Console.WriteLine();
+            */
 
+            //EXECICE 4 SERIE IV
+            Console.WriteLine("\n\nExercice IV SIV - Reunion");
+            BusinessSchedule planning = new BusinessSchedule();
+            planning.DisplayMeetings();
+            Console.WriteLine();
 
+            DateTime date1 = new DateTime(2025, 3, 26, 10, 0, 0);
+            TimeSpan duree1 = TimeSpan.FromHours(2);
+            planning.AddBusinessMeeting(date1, duree1);
+            DateTime date2 = new DateTime(2025, 3, 26, 14, 0, 0);
+            TimeSpan duree2 = TimeSpan.FromHours(2);
+            planning.AddBusinessMeeting(date2, duree2);
+            DateTime date3 = new DateTime(2025, 3, 26, 16, 0, 0);
+            TimeSpan duree3 = TimeSpan.FromHours(2);
+            planning.AddBusinessMeeting(date3, duree3);
+            DateTime date4 = new DateTime(2025, 3, 26, 18, 0, 0);
+            TimeSpan duree4 = TimeSpan.FromHours(2);
+            planning.AddBusinessMeeting(date4, duree4);
+            planning.DisplayMeetings();
+            Console.WriteLine();
+
+            DateTime date5 = new DateTime(2025, 3, 26, 14, 0, 0);
+            DateTime date6 = new DateTime(2025, 3, 26, 19, 0, 0);
+            planning.ClearMeetingPeriod(date5, date6);
+            planning.DisplayMeetings();
+            Console.WriteLine();
 
 
 
