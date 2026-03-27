@@ -14,7 +14,7 @@ using Serie_IV;
 
 namespace ExerciceS1
 {
-    class Program
+    class ProgramBronze
     {
         public static void Main(string[] args)
         {
