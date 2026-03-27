@@ -361,6 +361,7 @@ namespace ExerciceS1
             Console.WriteLine("\n\nExercice II SIV - Morpion");
             Serie_IV.Morpion.MorpionGame();
             Console.WriteLine();
+            */
 
             //EXECICE 3 SERIE IV
             Console.WriteLine("\n\nExercice III SIV - Contact téléphonique");
@@ -368,9 +369,13 @@ namespace ExerciceS1
             pageJaune.DisplayPhoneBook();
             Console.WriteLine();
 
-            Console.WriteLine(pageJaune.IsValidPhoneNumber("0612345678"));
-            Console.WriteLine(pageJaune.IsValidPhoneNumber("00612345678"));
-            Console.WriteLine(pageJaune.IsValidPhoneNumber("0061234567"));
+            bool valide;
+            valide = pageJaune.IsValidPhoneNumber("0612345678");
+            Console.WriteLine(valide);
+            valide = pageJaune.IsValidPhoneNumber("00612345678");
+            Console.WriteLine(valide);
+            valide = pageJaune.IsValidPhoneNumber("0061234567");
+            Console.WriteLine(valide);
             Console.WriteLine();
 
 
@@ -394,7 +399,7 @@ namespace ExerciceS1
 
             pageJaune.DisplayPhoneBook();
             Console.WriteLine();
-            */
+            
 
             //EXECICE 4 SERIE IV
             Console.WriteLine("\n\nExercice IV SIV - Reunion");
