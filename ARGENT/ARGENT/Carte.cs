@@ -1,4 +1,7 @@
-﻿using System;
+﻿using COMPTE;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CARTE
 {
@@ -6,14 +9,42 @@ namespace CARTE
     {
         private string _numero;
         private uint _plafond;
-        
+        private List<uint> _comptes;
+        private List<(DateTime horodatage, decimal montant)> _historique;
+
         public Carte(string numero, uint plafond)
         {
             _numero = numero;
             _plafond = plafond;
+            _comptes = new List<uint>();
+            _historique = new List<(DateTime, decimal)>();
         }
         public string Numero { get => _numero; set => _numero = value; }
         public uint Palfond { get => _plafond; set => _plafond = value; }
-        public void AfficherCarte() { Console.WriteLine($"Carte : {_numero}\tPlafond : {_plafond}"); }    
+        public List<uint> Comptes { get => _comptes; set => _comptes = value; }
+        public void AjouterCompte(uint idCompte)
+        {
+            if (!_comptes.Contains(idCompte)) _comptes.Add(idCompte);
+        }
+        public bool PossedeCompte(uint idCompte) => _comptes.Contains(idCompte);
+        public bool VerifierPlafond(DateTime horodatage, decimal montant)
+        {
+            DateTime limite = horodatage.AddDays(-10);
+            decimal totalDejaDebite = _historique
+                .Where(t => t.horodatage >= limite && t.horodatage < horodatage)
+                .Sum(t => t.montant);
+            return (totalDejaDebite + montant) <= _plafond;
+        }
+        public void EnregistrerDebit(DateTime horodatage, decimal montant)
+        {
+            _historique.Add((horodatage, montant));
+        }
+        public void AfficherCarte() { Console.WriteLine($"| {_numero}\t| ${_plafond.ToString("0.00").PadLeft(20, ' ')}"); }
+        public static void AfficherListeCarte(List<Carte> listCarte)
+        {
+            Console.WriteLine($"| NUMERO DE CARTE\t| PLAFOND");
+            foreach (var elem in listCarte) { elem.AfficherCarte(); }
+            Console.WriteLine($"===========================================================================");
+        }
     }
 }
