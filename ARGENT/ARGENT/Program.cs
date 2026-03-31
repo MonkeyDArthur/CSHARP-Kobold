@@ -67,6 +67,7 @@ namespace ARGENT
                 }
                 Carte.AfficherListeCarte(listeCarte);
             }
+            Console.WriteLine($"===========================================================================");
             Console.WriteLine();
 
 
@@ -110,6 +111,7 @@ namespace ARGENT
                 }
                 Compte.AfficherListeCompte(listeCompte);
             }
+            Console.WriteLine($"===========================================================================");
             Console.WriteLine();
 
             //LECTURE DU FICHIER TRANSACTION
@@ -147,13 +149,13 @@ namespace ARGENT
                 }
                 Transaction.AfficherListeTransaction(listeTransaction);
             }
+            Console.WriteLine($"===========================================================================");
             Console.WriteLine();
 
 
             //TRAITEMENT DES TRANSACTIONS ET ECRITURE DU FICHIER STATUS
             Console.WriteLine("============== STATUS =====================================================");
             List<(uint id, string statut)> listeStatuts = new List<(uint, string)>();
-            int retourLigne = 0;
 
             foreach (var transaction in listeTransaction)
             {
@@ -197,10 +199,20 @@ namespace ARGENT
                     }
                 }
                 listeStatuts.Add((transaction.ID, statut));
-                Console.Write($"TRANSACTION {transaction.ID} : {statut}\t");
-                retourLigne++;
-                if (retourLigne == 3) { Console.WriteLine(); retourLigne = 0; }
             }
+
+            int decalage = listeStatuts.Count / 3 + 1;
+            for (int i = 0; i < decalage; i++)
+            {
+                if (i < listeStatuts.Count)
+                    Console.Write($"TRANSACTION {listeStatuts[i].id} : {listeStatuts[i].statut}\t");
+                if (i + decalage < listeStatuts.Count)
+                    Console.Write($"TRANSACTION {listeStatuts[i + decalage].id} : {listeStatuts[i + decalage].statut}\t");
+                if (i + decalage * 2 < listeStatuts.Count)
+                    Console.Write($"TRANSACTION {listeStatuts[i + decalage * 2].id} : {listeStatuts[i + decalage * 2].statut}\t");
+                Console.WriteLine();
+            }
+            Console.WriteLine($"===========================================================================");
             Console.WriteLine();
 
             using (FileStream fileStatus = new FileStream(outStatus, FileMode.Create, FileAccess.Write))

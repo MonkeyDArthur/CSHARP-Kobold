@@ -36,7 +36,6 @@ namespace TRANSACTION
         {
             Console.WriteLine($"| ID\t| HORODATAGE\t\t| MONTANT\t\t| EXPE\t| DEST");
             foreach (var elem in listTransaction) { elem.AfficherTransaction(); }
-            Console.WriteLine($"===========================================================================");
         }
     }
 }

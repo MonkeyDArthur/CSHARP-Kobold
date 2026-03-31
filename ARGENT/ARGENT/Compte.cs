@@ -47,7 +47,6 @@ namespace COMPTE
         {
             Console.WriteLine($"| ID\t| Carte\t\t\t| Type\t\t| Solde");
             foreach (var elem in listCarte) { elem.AfficherCompte(); }
-            Console.WriteLine($"===========================================================================");
         }
     }
 }

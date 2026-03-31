@@ -44,7 +44,6 @@ namespace CARTE
         {
             Console.WriteLine($"| NUMERO DE CARTE\t| PLAFOND");
             foreach (var elem in listCarte) { elem.AfficherCarte(); }
-            Console.WriteLine($"===========================================================================");
         }
     }
 }
