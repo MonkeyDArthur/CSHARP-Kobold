@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,6 +12,11 @@ namespace ARGENT
 {
     class ProgramArgent
     {
+        // On évite les littéraux si possible dans le code - un seul changement avec static readonly 
+        static readonly string statutOK = "OK";
+        static readonly string statutKO = "KO";
+
+        // OK pour l'affichage ici, mais plutôt utiliser Debug que Console dans les prochains projets
         static void Main(string[] args)
         {
             //CULTURE INFO
@@ -33,12 +37,14 @@ namespace ARGENT
             string inTransaction = "transactionTest.txt";
             string outStatus = "statusTest.txt";
 
+            // La partie fonctionnelle et la partie entrée-sortie auraient pu être gérées dans des classes dédiées
+
             //STOCKAGE DES DONNEES D'ENTREE
             List<Carte> listeCarte = new List<Carte>();
             List<Compte> listeCompte = new List<Compte>();
             List<Transaction> listeTransaction = new List<Transaction>();
 
-            //LECTURE DU FICHIER CARTE
+            //LECTURE DU FICHIER CARTE - OK
             Console.WriteLine("============== CARTE ======================================================");
             using (FileStream fileCarte = new FileStream(inCarte, FileMode.Open, FileAccess.Read))
             using (StreamReader readerCarte = new StreamReader(fileCarte))
@@ -53,17 +59,28 @@ namespace ARGENT
                     if (numeroCarte.Length != 16
                         || numeroCarte.All(c => c == '0')
                         || numeroCarte.Any(char.IsLetter))
+                    {
                         continue;
-                    else if (contenu[1] == "") plafond = 500;
+                    }
+                    else if (contenu[1] == "")
+                    {
+                        plafond = 500;
+                    }
                     else if (uint.TryParse(contenu[1], NumberStyles.Any, cultureInfo, out plafond))
                     {
                         if (plafond < 500 || plafond > 3000) continue;
                         plafond = plafond / 100 * 100;
                     }
-                    else continue;
+                    else
+                    {
+                        continue;
+                    }
 
                     //VERIF DOUBLON DE NUMERO DE CARTE
-                    if (!listeCarte.Exists(x => x.Numero == numeroCarte)) listeCarte.Add(new Carte(numeroCarte, plafond));
+                    if (!listeCarte.Exists(x => x.Numero == numeroCarte))
+                    {
+                        listeCarte.Add(new Carte(numeroCarte, plafond));
+                    }
                 }
                 Carte.AfficherListeCarte(listeCarte);
             }
@@ -71,7 +88,7 @@ namespace ARGENT
             Console.WriteLine();
 
 
-            //LECTURE DU FICHIER COMPTE
+            //LECTURE DU FICHIER COMPTE - OK
             Console.WriteLine("============== COMPTE =====================================================");
             using (FileStream fileCompte = new FileStream(inCompte, FileMode.Open, FileAccess.Read))
             using (StreamReader readerCompte = new StreamReader(fileCompte))
@@ -119,6 +136,7 @@ namespace ARGENT
             using (FileStream fileTransaction = new FileStream(inTransaction, FileMode.Open, FileAccess.Read))
             using (StreamReader readerTransaction = new StreamReader(fileTransaction))
             {
+                // OK, cela fonctionne - méthode la plus simple et rapide
                 foreach (var ligne in File.ReadLines(inTransaction))
                 {
                     var contenu = ligne.Split(';');
@@ -152,6 +170,8 @@ namespace ARGENT
             Console.WriteLine("===========================================================================");
             Console.WriteLine();
 
+            // Pas bonne idée de gérer les transactions dans une liste car tu risques une saturation de la mémoire 
+            // en production (si tu dépasses 8Go) - plus intéressant de les traiter après tes contrôles
 
             //TRAITEMENT DES TRANSACTIONS ET ECRITURE DU FICHIER STATUS
             Console.WriteLine("============== STATUS =====================================================");
@@ -159,7 +179,7 @@ namespace ARGENT
 
             foreach (var transaction in listeTransaction)
             {
-                string statut = "KO";
+                string statut = statutKO;
                 uint expId = transaction.Expediteur;
                 uint destId = transaction.Destinataire;
                 decimal montant = transaction.Montant;
@@ -168,18 +188,19 @@ namespace ARGENT
                 Compte compteDest = destId != 0 ? listeCompte.Find(c => c.ID == destId) : null;
 
                 // DEPOT
-                if (expId == 0 && compteDest != null) { if (compteDest.Deposer(montant)) statut = "OK"; }
+                if (expId == 0 && compteDest != null) { if (compteDest.Deposer(montant)) statut = statutOK; }
 
                 //RETRAIT
                 else if (expId != 0 && destId == 0 && compteExp != null)
                 {
                     Carte carteExp = listeCarte.Find(c => c.Numero == compteExp.Carte);
+                    // Logique fonctionnelle respectée
                     if (carteExp != null
                         && carteExp.VerifierPlafond(transaction.Horodatage, montant)
                         && compteExp.Retirer(montant))
                     {
                         carteExp.EnregistrerDebit(transaction.Horodatage, montant);
-                        statut = "OK";
+                        statut = statutOK;
                     }
                 }
 
@@ -195,7 +216,7 @@ namespace ARGENT
                     {
                         compteDest.Deposer(montant);
                         carteExp.EnregistrerDebit(transaction.Horodatage, montant);
-                        statut = "OK";
+                        statut = statutOK;
                     }
                 }
                 listeStatuts.Add((transaction.ID, statut));

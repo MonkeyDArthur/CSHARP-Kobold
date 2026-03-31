@@ -1,5 +1,4 @@
-﻿using COMPTE;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace TRANSACTION
@@ -20,7 +19,7 @@ namespace TRANSACTION
             _expediteur = expediteur;
             _destinataire = destinataire;
         }
-
+        // Ici pas de soucis, mais les propriétés auto-implémentées auraient été suffisantes
         public uint ID { get => _ID; set => _ID = value; }
         public DateTime Horodatage { get => _horodatage; set => _horodatage = value; }
         public decimal Montant { get => _montant; set => _montant = value; }

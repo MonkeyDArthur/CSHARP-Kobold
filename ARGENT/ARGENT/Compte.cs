@@ -1,5 +1,4 @@
-﻿using CARTE;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace COMPTE
@@ -11,6 +10,7 @@ namespace COMPTE
         private string _type;
         private decimal _solde;
 
+        // Il aurait été intéressant d'utiliser le constructeur suivant avec une valeur par défaut solde = 0, non ? 
         public Compte(uint ID, string numeroCarte, string type)
         { 
             _ID = ID;
@@ -25,10 +25,12 @@ namespace COMPTE
             _type = type;
             _solde = solde;
         }
-        public uint ID { get => _ID; set => _ID = value; }
-        public string Carte { get => _numeroCarte; set => _numeroCarte = value; }
-        public string Type { get => _type; set => _type = value; }
-        public decimal Solde { get => _solde; set => _solde = value; }
+        // Pourquoi des set pour les propriétés suivantes ??
+        public uint ID { get => _ID; } // set => _ID = value; }
+        public string Carte { get => _numeroCarte; } // set => _numeroCarte = value; }
+        public string Type { get => _type; }// set => _type = value; }
+        // Ici dangereux de permettre la modification du solde en dehors de la classe !
+        public decimal Solde { get => _solde; } // set => _solde = value; }
         public bool Deposer(decimal montant)
         {
             if (montant <= 0) return false;
@@ -37,8 +39,16 @@ namespace COMPTE
         }
         public bool Retirer(decimal montant)
         {
-            if (montant <= 0) return false;
-            if (_solde < montant) return false;
+            if (montant <= 0)
+            {
+                return false;
+            }
+
+            if (_solde < montant)
+            {
+                return false;
+            }
+
             _solde -= montant;
             return true;
         }

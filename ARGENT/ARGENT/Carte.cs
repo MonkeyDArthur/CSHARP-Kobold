@@ -1,5 +1,4 @@
-﻿using COMPTE;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,6 +9,7 @@ namespace CARTE
         private string _numero;
         private uint _plafond;
         private List<uint> _comptes;
+        // Intéressante utilisation des Tuples
         private List<(DateTime horodatage, decimal montant)> _historique;
 
         public Carte(string numero, uint plafond)
@@ -19,8 +19,9 @@ namespace CARTE
             _comptes = new List<uint>();
             _historique = new List<(DateTime, decimal)>();
         }
-        public string Numero { get => _numero; set => _numero = value; }
-        public uint Palfond { get => _plafond; set => _plafond = value; }
+        // Pourquoi définir un set pour les deux propriétés suivantes ? 
+        public string Numero { get => _numero; } //set => _numero = value; }
+        public uint Plafond { get => _plafond; } //set => _plafond = value; }
         public List<uint> Comptes { get => _comptes; set => _comptes = value; }
         public void AjouterCompte(uint idCompte)
         {
@@ -30,6 +31,7 @@ namespace CARTE
         public bool VerifierPlafond(DateTime horodatage, decimal montant)
         {
             DateTime limite = horodatage.AddDays(-10);
+            // Bonne utilisation du Linq 
             decimal totalDejaDebite = _historique
                 .Where(t => t.horodatage >= limite && t.horodatage < horodatage)
                 .Sum(t => t.montant);
