@@ -67,7 +67,7 @@ namespace ARGENT
                 }
                 Carte.AfficherListeCarte(listeCarte);
             }
-            Console.WriteLine($"===========================================================================");
+            Console.WriteLine("===========================================================================");
             Console.WriteLine();
 
 
@@ -111,7 +111,7 @@ namespace ARGENT
                 }
                 Compte.AfficherListeCompte(listeCompte);
             }
-            Console.WriteLine($"===========================================================================");
+            Console.WriteLine("===========================================================================");
             Console.WriteLine();
 
             //LECTURE DU FICHIER TRANSACTION
@@ -149,7 +149,7 @@ namespace ARGENT
                 }
                 Transaction.AfficherListeTransaction(listeTransaction);
             }
-            Console.WriteLine($"===========================================================================");
+            Console.WriteLine("===========================================================================");
             Console.WriteLine();
 
 
@@ -212,7 +212,7 @@ namespace ARGENT
                     Console.Write($"TRANSACTION {listeStatuts[i + decalage * 2].id} : {listeStatuts[i + decalage * 2].statut}\t");
                 Console.WriteLine();
             }
-            Console.WriteLine($"===========================================================================");
+            Console.WriteLine("===========================================================================");
             Console.WriteLine();
 
             using (FileStream fileStatus = new FileStream(outStatus, FileMode.Create, FileAccess.Write))
@@ -225,6 +225,7 @@ namespace ARGENT
 
             Console.WriteLine("============== SOLDES FINAUX ==============================================");
             Compte.AfficherListeCompte(listeCompte);
+            Console.WriteLine("===========================================================================");
             Console.WriteLine();
 
             Console.WriteLine("============== FIN TRAITEMENT =============================================");

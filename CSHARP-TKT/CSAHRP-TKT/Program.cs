@@ -12,7 +12,7 @@ using Serie_III;
 using Serie_IV;
 
 
-namespace ExerciceS1
+namespace BRONZE
 {
     class ProgramBronze
     {
