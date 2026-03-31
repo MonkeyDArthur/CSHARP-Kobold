@@ -26,7 +26,8 @@ namespace ARGENT
             Console.WriteLine();
 
             //AFFECTATION FICHIER ENTREE ET SORTIE
-            Directory.SetCurrentDirectory(@"C:\Users\artib\Downloads");
+            //Directory.SetCurrentDirectory(@"C:\Users\artib\Downloads");   //MAISON
+            Directory.SetCurrentDirectory(@"C:\Users\Formation\Desktop");   //INTM
             string inCarte = "carteTest.txt";
             string inCompte = "compteTest.txt";
             string inTransaction = "transactionTest.txt";
@@ -152,6 +153,7 @@ namespace ARGENT
             //TRAITEMENT DES TRANSACTIONS ET ECRITURE DU FICHIER STATUS
             Console.WriteLine("============== STATUS =====================================================");
             List<(uint id, string statut)> listeStatuts = new List<(uint, string)>();
+            int retourLigne = 0;
 
             foreach (var transaction in listeTransaction)
             {
@@ -195,14 +197,16 @@ namespace ARGENT
                     }
                 }
                 listeStatuts.Add((transaction.ID, statut));
-                Console.WriteLine($"TRANSACTION {transaction.ID} : {statut}\t");
+                Console.Write($"TRANSACTION {transaction.ID} : {statut}\t");
+                retourLigne++;
+                if (retourLigne == 3) { Console.WriteLine(); retourLigne = 0; }
             }
+            Console.WriteLine();
 
             using (FileStream fileStatus = new FileStream(outStatus, FileMode.Create, FileAccess.Write))
             using (StreamWriter writerStatus = new StreamWriter(fileStatus))
             {
-                foreach (var (id, statuts) in listeStatuts)
-                writerStatus.WriteLine($"{id};{statuts}");
+                foreach (var (id, statuts) in listeStatuts) writerStatus.WriteLine($"{id};{statuts}");
             } 
             Console.WriteLine($"ECRITURE DANS : {outStatus}");
             Console.WriteLine();
