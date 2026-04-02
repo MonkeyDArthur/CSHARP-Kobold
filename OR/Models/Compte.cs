@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System.Xml.Serialization;
 
 namespace Or.Models
 {
+    [XmlRoot]
     public enum TypeCompte { Courant, Livret }
 
     public class Compte
     {
-        public int Id { get; set; }
-        public long IdentifiantCarte { get; set; }
-        public TypeCompte TypeDuCompte { get; set; }
-        public decimal Solde { get; private set; }
+        [XmlAttribute] public int Id { get; set; }
+        [XmlIgnore] public long IdentifiantCarte { get; set; }
+        [XmlAttribute] public TypeCompte TypeDuCompte { get; set; }
+        [XmlAttribute] public decimal Solde { get; private set; }
 
         public Compte(int id, long identifiantCarte, TypeCompte type, decimal soldeInitial)
         {
@@ -26,14 +27,8 @@ namespace Or.Models
         /// <returns>Statut du dépôt</returns>
         public bool EstDepotValide(Transaction transaction)
         {
-            if (transaction.Montant > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (transaction.Montant > 0) return true;
+            else return false;
         }
 
         /// <summary>
@@ -43,20 +38,13 @@ namespace Or.Models
         /// <returns>Statut du retrait</returns>
         public bool EstRetraitValide(Transaction transaction)
         {
-            if (EstRetraitAutorise(transaction.Montant))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (EstRetraitAutorise(transaction.Montant)) return true;
+            else return false; 
         }
 
         private bool EstRetraitAutorise(decimal montant)
         {
             return Solde >= montant && montant > 0;
-        }
-
+        } 
     }
 }

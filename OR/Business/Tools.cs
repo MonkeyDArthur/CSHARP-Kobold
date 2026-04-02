@@ -19,6 +19,18 @@ namespace Or.Business
         InterCompte = 2
     }
 
+    /// <summary>
+    /// Enumération décrivant le type d'erreur
+    /// </summary>
+    public enum CodeErreur
+    {
+        PlafondMaxDepasse = 0,
+        MontantInvalide = 1,
+        SoldeInsuffisant = 2,
+        VirementInterdit = 3,
+        AutreErreur = 100
+    }
+
     public static class Tools
     {
         public static DateTime ConversionDate(string horodatage)
@@ -66,6 +78,17 @@ namespace Or.Business
             else
             {
                 return Operation.InterCompte;
+            }
+        }
+        public static CodeErreur TypeErreur(int code)
+        {
+            switch (code)
+            {
+                case 0: return CodeErreur.PlafondMaxDepasse;
+                case 1: return CodeErreur.MontantInvalide;
+                case 2: return CodeErreur.SoldeInsuffisant;
+                case 3: return CodeErreur.VirementInterdit;
+                default: return CodeErreur.AutreErreur;
             }
         }
     }

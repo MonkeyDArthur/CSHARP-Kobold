@@ -23,6 +23,20 @@ namespace Or.Models
             ListComptesId = new List<int>();
             Historique = new List<Transaction>();
         }
+        public decimal SoldeCarteActuel(DateTime date, long numCarte)
+        {
+            List<Transaction> retraitsHisto = Historique.Where(x => (x.Horodatage > date.AddDays(-10)) && ListComptesId.Contains(x.Expediteur)).Select(x => x).ToList();
+            decimal sommeHisto = Plafond - retraitsHisto.Sum(x => x.Montant);
+
+            decimal soldeCompte = 0;
+            List<Compte> compteAssocier = SqlRequests.ListeComptesAssociesCarte(numCarte);
+            foreach (var compte in compteAssocier)
+            {
+                if (compte.TypeDuCompte == TypeCompte.Courant) { soldeCompte = compte.Solde; }
+            }
+
+            return sommeHisto < soldeCompte ? sommeHisto : soldeCompte;
+        }
 
         public void AlimenterHistoriqueEtListeComptes(List<Transaction> hist, List<int> comptesId)
         {

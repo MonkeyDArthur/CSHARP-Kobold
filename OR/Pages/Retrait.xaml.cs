@@ -10,26 +10,29 @@ using System.Windows.Navigation;
 
 namespace Or.Pages
 {
-    /// <summary>
-    /// Logique d'interaction pour Retrait.xaml
-    /// </summary>
     public partial class Retrait : PageFunction<long>
     {
         Carte CartePorteur { get; set; }
         Compte ComptePorteur { get; set; }
         public Retrait(long numCarte)
         {
+            // INIT PAGE
             InitializeComponent();
-            Montant.Text = 0M.ToString("C2");
 
+            // INIT VARIABLE
+            Montant.Text = 0M.ToString("C2");
+                // RECUP ET INIT INFO CARTE
             CartePorteur = SqlRequests.InfosCarte(numCarte);
+            PlafondMaxRetrait.Text = CartePorteur.Plafond.ToString("C2");
+                // RECUP ET INIT SOLDE CARTE
             ComptePorteur = SqlRequests.ListeComptesAssociesCarte(CartePorteur.Id).Find(x => x.TypeDuCompte == TypeCompte.Courant);
+            Solde.Text = ComptePorteur.Solde.ToString("C2");
+                // RECUP HISTORIQUE CARTE POUR CALCULER PLAFOND MAX
             List<Transaction> transac = SqlRequests.ListeTransactionsAssociesCarte(numCarte);
             List<int> cpts = SqlRequests.ListeComptesAssociesCarte(numCarte).Select(x => x.Id).ToList();
             CartePorteur.AlimenterHistoriqueEtListeComptes(transac, cpts);
-
-            PlafondMaxRetrait.Text = CartePorteur.Plafond.ToString("C2");
-            Solde.Text = ComptePorteur.Solde.ToString("C2");
+                // INIT PLAFOND AUTORISE SELON HISTORIQUE
+            PlafondActualise.Text = CartePorteur.SoldeCarteActuel(transac[transac.Count() - 1].Horodatage, numCarte).ToString("C2");
         }
 
         private void Retour_Click(object sender, RoutedEventArgs e)
@@ -53,12 +56,17 @@ namespace Or.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Opération de retrait non authorisée");
+                    // VERIF CONDITITON POUR MESSAGE ERREUR PRECIS
+                    if (CartePorteur.Plafond < t.Montant && ComptePorteur.Solde < t.Montant)
+                        MessageBox.Show($"{CodeErreur.PlafondMaxDepasse} et {CodeErreur.SoldeInsuffisant}");
+                    else if (CartePorteur.Plafond < t.Montant)
+                        MessageBox.Show($"{CodeErreur.PlafondMaxDepasse}");
+                    else MessageBox.Show($"{CodeErreur.SoldeInsuffisant}");
                 }
             }
             else
             {
-                MessageBox.Show("Montant invalide");
+                MessageBox.Show($"{CodeErreur.MontantInvalide}");
             }
         }
     }

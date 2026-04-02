@@ -47,8 +47,8 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="80">
-
+                    
+                    <GridViewColumn Header="ID" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -60,8 +60,19 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Date" Width="200">
+                    <GridViewColumn Header="Opération" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock Text="{Binding TypeOperation}"
+                           Style="{StaticResource TextColumnStyle}"
+                           TextAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
+                    <GridViewColumn Header="Date" Width="200">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -74,7 +85,6 @@
                     </GridViewColumn>
 
                     <GridViewColumn Header="Montant" Width="100">
-
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Montant, StringFormat={}{0:C2}, Converter={StaticResource EuroConverter}}"
