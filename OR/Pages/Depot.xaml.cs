@@ -48,12 +48,12 @@ namespace Or.Pages
                 }
                 else
                 {
-                    MessageBox.Show($"{CodeErreur.MontantInvalide}");
+                    MessageBox.Show("Opération refusée");
                 }
             }
             else
             {
-                MessageBox.Show($"{CodeErreur.MontantInvalide}");
+                MessageBox.Show("Montant invalide");
             }
         }
     }

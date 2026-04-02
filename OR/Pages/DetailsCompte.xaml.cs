@@ -27,13 +27,7 @@ namespace Or.Pages
 
             // - si opération de débit, + si opération de crédit
             transactions.ForEach(x => x.Montant = x.Expediteur == c.Id ? -x.Montant : x.Montant);
-            foreach (var transaction in transactions)
-            {
-                if (transaction.TypeOperation == "Virement")
-                {
-                    transaction.TypeOperation = transaction.Montant < 0 ? "Virement\nsortant" : "Virement\nentrant";
-                }
-            }
+
             listView.ItemsSource = transactions;
 
         }
@@ -50,9 +44,8 @@ namespace Or.Pages
             {
                 double totalWidth = listView.ActualWidth - SystemParameters.VerticalScrollBarWidth;
                 gridView.Columns[0].Width = totalWidth * 0.10; // 10%
-                gridView.Columns[1].Width = totalWidth * 0.20; // 10%
-                gridView.Columns[2].Width = totalWidth * 0.45; // 40%
-                gridView.Columns[3].Width = totalWidth * 0.25; // 20%
+                gridView.Columns[1].Width = totalWidth * 0.45; // 40%
+                gridView.Columns[2].Width = totalWidth * 0.45; // 20%
             }
         }
     }

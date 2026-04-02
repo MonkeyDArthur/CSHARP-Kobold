@@ -18,14 +18,6 @@ namespace Or.Business
         RetraitSimple = 1,
         InterCompte = 2
     }
-    public enum CodeErreur
-    {
-        PlafondMaxDepasse = 0,
-        MontantInvalide = 1,
-        SoldeInsuffisant = 2,
-        VirementInterdit = 3,
-        AutreErreur = 100
-    }
 
     public static class Tools
     {
@@ -74,17 +66,6 @@ namespace Or.Business
             else
             {
                 return Operation.InterCompte;
-            }
-        }
-        public static CodeErreur TypeErreur(int code)
-        {
-            switch (code)
-            {
-                case 0 : return CodeErreur.PlafondMaxDepasse;
-                case 1: return CodeErreur.MontantInvalide;
-                case 2: return CodeErreur.SoldeInsuffisant;
-                case 3: return CodeErreur.VirementInterdit;
-                default: return CodeErreur.AutreErreur;
             }
         }
     }

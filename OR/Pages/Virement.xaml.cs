@@ -65,16 +65,12 @@ namespace Or.Pages
                 }
                 else
                 {
-                    if (ex.Solde < t.Montant && ex.Solde < t.Montant)
-                        MessageBox.Show($"{CodeErreur.PlafondMaxDepasse} et {CodeErreur.SoldeInsuffisant} de l'expediteur");
-                    else if (ex.Solde < t.Montant)
-                        MessageBox.Show($"{CodeErreur.SoldeInsuffisant} de l'expediteur");
-                    else MessageBox.Show($"{CodeErreur.PlafondMaxDepasse} de l'expediteur");
+                    MessageBox.Show("Opération de virement non autorisé");
                 }
             }
             else
             {
-                MessageBox.Show($"{CodeErreur.MontantInvalide}");
+                MessageBox.Show("Montant invalide");
             }
 
         }

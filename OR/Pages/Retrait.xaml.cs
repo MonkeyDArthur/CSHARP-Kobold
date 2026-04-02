@@ -29,7 +29,6 @@ namespace Or.Pages
             CartePorteur.AlimenterHistoriqueEtListeComptes(transac, cpts);
 
             PlafondMaxRetrait.Text = CartePorteur.Plafond.ToString("C2");
-            PlafondActualise.Text = CartePorteur.SoldeCarteActuel(transac[transac.Count()-1].Horodatage, numCarte) .ToString("C2");
             Solde.Text = ComptePorteur.Solde.ToString("C2");
         }
 
@@ -54,16 +53,12 @@ namespace Or.Pages
                 }
                 else
                 {
-                    if (CartePorteur.Plafond < t.Montant && ComptePorteur.Solde < t.Montant)
-                        MessageBox.Show($"{CodeErreur.PlafondMaxDepasse} et {CodeErreur.SoldeInsuffisant}");
-                    else if (CartePorteur.Plafond < t.Montant)
-                        MessageBox.Show($"{CodeErreur.PlafondMaxDepasse}");
-                    else MessageBox.Show($"{CodeErreur.SoldeInsuffisant}");
+                    MessageBox.Show("Opération de retrait non authorisée");
                 }
             }
             else
             {
-                MessageBox.Show($"{CodeErreur.MontantInvalide}");
+                MessageBox.Show("Montant invalide");
             }
         }
     }

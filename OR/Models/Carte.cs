@@ -127,23 +127,8 @@ namespace Or.Models
         {
             Operation operation = Tools.TypeTransaction(Expediteur.Id, Destinataire.Id);
 
-            return operation == Operation.InterCompte 
-                && Expediteur.TypeDuCompte == TypeCompte.Courant 
-                && Destinataire.TypeDuCompte == TypeCompte.Courant ;
-        }
-        public decimal SoldeCarteActuel(DateTime date, long numCarte)
-        {
-            List<Transaction> retraitsHisto = Historique.Where(x => (x.Horodatage > date.AddDays(-10)) && ListComptesId.Contains(x.Expediteur)).Select(x => x).ToList();
-            decimal sommeHisto = Plafond - retraitsHisto.Sum(x => x.Montant);
-
-            decimal soldeCompte = 0;
-            List<Compte> compteAssocier = SqlRequests.ListeComptesAssociesCarte(numCarte);
-            foreach(var compte in compteAssocier)
-            {
-                if (compte.TypeDuCompte == TypeCompte.Courant) { soldeCompte = compte.Solde; }
-            }
-
-            return sommeHisto < soldeCompte ? sommeHisto : soldeCompte;
+            return operation == Operation.InterCompte &&
+                   Expediteur.TypeDuCompte == TypeCompte.Courant && Destinataire.TypeDuCompte == TypeCompte.Courant ;
         }
 
     }

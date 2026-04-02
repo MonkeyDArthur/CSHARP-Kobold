@@ -9,7 +9,6 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Or.Business
 {
@@ -29,91 +28,6 @@ namespace Or.Business
         static readonly string queryInsertHistTransac = "INSERT INTO HISTTRANSACTION (IdtTransaction,NumCarte) VALUES (@IdtTrans,@Carte)";
 
         static readonly string queryUpdateCompte = "UPDATE COMPTE SET Solde=Solde-@Montant WHERE IdtCpt=@IdtCompte";
-
-        static readonly string queryCreateBeneficiaire = "CREATE TABLE BENEFICIAIRE (numCarte int, IdBeneficiaire int, CONSTRAINT PK_Benef PRIMARY KEY (numCarte, IdBeneficiaire), FOREIGN KEY (numCarte) REFERENCES CARTE(NumCarte), FOREIGN KEY (IdBeneficiaire) REFERENCES COMPTE(IdtCpt) )";
-        static readonly string queryDropBeneficiaire = "DROP TABLE BENEFICIAIRE";
-
-        static readonly string queryAddBeneficiaire = "INSERT INTO \"BENEFICIAIRE\" (numCarte, IdBeneficiaire) VALUES (@numCarte, @IdBeneficiaire)";
-        static readonly string queryDelBeneficiaire = "DELETE FROM \"BENEFICIAIRE\" WHERE numCarte = @numCarte AND IdBeneficiaire = @IdBeneficiaire";
-        static readonly string queryBeneficiaireCarte = "SELECT numCarte, IdBeneficiaire FROM BENEFICIAIRE WHERE numCarte = @numCarte AND IdBeneficiaire = @IdBeneficiaire";
-
-
-        public static void createTable()
-        {
-            string connectionString = ConstructionConnexionString(fileDb);
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                using (var command = new SqliteCommand(queryCreateBeneficiaire, connection))
-                {
-                    int sqlcode = command.ExecuteNonQuery();
-                }
-            }
-        }
-        public static void dropTable()
-        {
-            string connectionString = ConstructionConnexionString(fileDb);
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                using (var command = new SqliteCommand(queryDropBeneficiaire, connection))
-                {
-                    int sqlcode = command.ExecuteNonQuery();
-                }
-            }
-        }
-        public static void AjouterBeneficiaire(long numCarte, long IdBeneficiaire)
-        {
-            string connectionString = ConstructionConnexionString(fileDb);
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                using (var command = new SqliteCommand(queryAddBeneficiaire, connection))
-                {
-                    try
-                    {
-                        command.Parameters.AddWithValue("@numCarte", numCarte);
-                        command.Parameters.AddWithValue("@IdBeneficiaire", IdBeneficiaire);
-                        int sqlcode = command.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        // En cas d’erreur, annuler la transaction
-                        MessageBox.Show(ex.Message);
-                        Console.WriteLine("Erreur : " + ex.Message);
-                        Console.WriteLine("Ajout beneficiaire annulée.");
-                    }
-
-                }
-            }
-        }
-        public static void SupprimerBeneficiaire(long numCarte, long IdBeneficiaire)
-        {
-            string connectionString = ConstructionConnexionString(fileDb);
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                using (var command = new SqliteCommand(queryDelBeneficiaire, connection))
-                {
-                    try
-                    {
-                        command.Parameters.AddWithValue("@numCarte", numCarte);
-                        command.Parameters.AddWithValue("@IdBeneficiaire", IdBeneficiaire);
-                        int sqlcode = command.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        // En cas d’erreur, annuler la transaction
-                        MessageBox.Show(ex.Message);
-                        Console.WriteLine("Erreur : " + ex.Message);
-                        Console.WriteLine("Suppression beneficiaire annulée.");
-                    }
-
-                }
-            }
-        }
-
-
 
         /// <summary>
         /// Obtention des infos d'une carte
@@ -229,38 +143,6 @@ namespace Or.Business
             }
 
             return comptes;
-        }
-
-        public static List<long> ListeBeneficiaireAssicieCarte(long numCarte)
-        {
-            List<long> beneficiaire = new List<long>();
-
-            string connectionString = ConstructionConnexionString(fileDb);
-
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqliteCommand(queryBeneficiaireCarte, connection))
-                {
-                    command.Parameters.AddWithValue("@numCarte", numCarte);
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        int IdCompte;
-                        long IdBeneficiaire;
-
-                        while (reader.Read())
-                        {
-                            IdCompte = reader.GetInt32(0);
-                            IdBeneficiaire = reader.GetInt32(1);
-
-                            beneficiaire.Add(IdBeneficiaire);
-                        }
-                    }
-                }
-            }
-            return beneficiaire;
         }
 
 
