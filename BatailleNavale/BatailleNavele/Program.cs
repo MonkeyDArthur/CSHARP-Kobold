@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-//Q2a:  Quand tout les positions du bateaux sont touché
+//Q2a:  Quand toutes les positions du bateaux sont touché
 //Q7a:  Quand toutes les positions des differents bateaux sont en statut coulé
 
 namespace Bataille_Navale

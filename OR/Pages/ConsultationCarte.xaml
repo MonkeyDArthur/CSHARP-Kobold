@@ -107,14 +107,17 @@
             <Button Content="Effectuer un Retrait" Margin="0,0,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="GoRetrait"/>
             <Button Content="Effectuer un Dépôt"  Margin="0,0,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="GoDepot" />
             <Button Content="Effectuer un Virement"  Margin="0,0,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="GoVirement" />
-            <Button Content="Ajouter un Bénéficiaire"  Margin="0,0,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="GoVirement" />
-
+            <Button Content="Ajouter un Bénéficiaire"  Margin="0,0,0,8" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="GoListeBeneficiaires" />
         </StackPanel>
 
-        <Button Content="Exporter Transactions" Width="200" VerticalAlignment="Bottom" Margin="0,0,0,18" Grid.Row="2" Grid.Column="2" Click="GoHistoTransactions"/>
-        <Button Content="Exporter Transactions" Width="200" VerticalAlignment="Bottom" Margin="0,0,0,18" Grid.Row="3" Grid.Column="2" Click="GoHistoTransactions"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,18" Grid.Row="2" Grid.Column="2">
 
+            <Button Content="Exporter Transactions" Width="200" Margin="0,0,0,8" Click="ExporterTransactions_Click"/>
+            <Button Content="Importer Transactions" Width="200" Click="ImporterTransactions_Click"/>
+            <TextBlock Text="Fichier à importer" Margin="0,12,0,4" FontWeight="SemiBold"/>
+            <TextBox x:Name="FichierImport" Margin="0,0,0,8" HorizontalAlignment="Stretch"/>
 
+        </StackPanel>
 
     </Grid>
 </PageFunction>

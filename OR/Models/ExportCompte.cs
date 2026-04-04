@@ -1,17 +1,13 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 
 namespace Or.Models
 {
-    [XmlRoot]
-    class ExportCompte
+    [XmlRoot("Comptes")]
+    public class ExportComptes
     {
-        [XmlAttribute] public Compte Compte { get; set; }
-        [XmlAttribute] public List<Transaction> listeTransaction { get; set; }
-        public ExportCompte(Compte compte, List<Transaction> listetransaction)
-        {
-            Compte = compte;
-            listeTransaction = listetransaction;
-        }
+        [XmlElement("Compte")] public List<ExportCompteTransactions> Comptes { get; set; }
+        public ExportComptes() { Comptes = new List<ExportCompteTransactions>(); }
     }
 }
