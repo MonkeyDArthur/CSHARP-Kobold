@@ -80,19 +80,25 @@ namespace Or.Business
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
-                string query =
-                    @"  SELECT IdtCpt, NumCarte, TypeCompte, Solde
-                        FROM   COMPTE
-                        WHERE  NumCarte = @numCarte AND IdtCpt <> @idExp
-                        UNION
-                        SELECT co.IdtCpt, co.NumCarte, co.TypeCompte, co.Solde
-                        FROM   BENEFICIAIRE b
-                        JOIN   COMPTE co ON co.IdtCpt = b.IdBeneficiaire
-                        WHERE  b.numCarte = @numCarte AND co.IdtCpt <> @idExp";
-                using (var command = new SqliteCommand(query, connection))
+
+                using (var beneficiaire = connection.BeginTransaction())
                 {
-                    command.Parameters.AddWithValue("@numCarte", numCarte);
-                    command.Parameters.AddWithValue("@idtCpt", idtCpt);
+                    try
+                    {
+                        var addBeneficiaire = connection.CreateCommand();
+                        addBeneficiaire.CommandText = "INSERT INTO BENEFICIAIRE (numCarte, IdBeneficiaire) VALUES (@numCarte, @IdBeneficiaire)";
+                        addBeneficiaire.Transaction = beneficiaire;
+                        addBeneficiaire.Parameters.AddWithValue("@IdBeneficiaire", idtCpt);
+                        addBeneficiaire.Parameters.AddWithValue("@numCarte", numCarte);
+                        addBeneficiaire.ExecuteNonQuery();
+                        beneficiaire.Commit();
+                        Console.WriteLine("Ajout beneficiaire validée.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Erreur sur ajout beneficiaire: " + ex.Message);
+                        beneficiaire.Rollback();
+                    }
                 }
             }
         }
@@ -102,11 +108,25 @@ namespace Or.Business
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
-                string query = "DELETE FROM BENEFICIAIRE WHERE numCarte = @numCarte AND IdBeneficiaire = @idtCpt";
-                using (var command = new SqliteCommand(query, connection))
+                using (var beneficiaire = connection.BeginTransaction())
                 {
-                    command.Parameters.AddWithValue("@numCarte", numCarte);
-                    command.Parameters.AddWithValue("@idtCpt", idtCpt);
+
+                    try
+                    {
+                        var delBeneficiaire = connection.CreateCommand();
+                        delBeneficiaire.CommandText = "DELETE FROM BENEFICIAIRE WHERE numCarte = @numCarte AND IdBeneficiaire = @IdBeneficiaire";
+                        delBeneficiaire.Transaction = beneficiaire;
+                        delBeneficiaire.Parameters.AddWithValue("@IdBeneficiaire", idtCpt);
+                        delBeneficiaire.Parameters.AddWithValue("@numCarte", numCarte);
+                        delBeneficiaire.ExecuteNonQuery();
+                        beneficiaire.Commit();
+                        Console.WriteLine("Beneficiaire supprimée");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Erreur sur suppresion beneficiaire: " + ex.Message);
+                        beneficiaire.Rollback();
+                    }
                 }
             }
         }

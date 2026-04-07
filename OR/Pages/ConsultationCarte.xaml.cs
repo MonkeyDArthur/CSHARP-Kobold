@@ -83,6 +83,8 @@ namespace Or.Pages
                 List<Transaction> transactions = SqlRequests.ListeTransactionsAssociesCompte(compte.Id);
                 exportComptes.Comptes.Add(new ExportCompteTransactions(compte, transactions));
             }
+            
+            
             string cheminBureau = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string cheminComplet = Path.Combine(cheminBureau, nomFichier);
             XmlSerializer serializer = new XmlSerializer(typeof(ExportComptes));
@@ -98,9 +100,7 @@ namespace Or.Pages
                 string nomFichier = $"export_carte_{Numero.Text}_{DateTime.Now:yyyyMMdd_HHmmss}.xml";
                 SerialiserCompteTransaction(nomFichier);
 
-                string chemin = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                    nomFichier);
+                string chemin = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),nomFichier);
 
                 MessageBox.Show($"Export réussi :\n{chemin}", "Export XML", MessageBoxButton.OK, MessageBoxImage.Information);
             }

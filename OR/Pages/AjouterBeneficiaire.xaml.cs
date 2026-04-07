@@ -20,13 +20,13 @@ namespace Or.Pages
         {
             if (!int.TryParse(NumeroCpt.Text.Trim(), out int idCompte))
             {
-                MessageBox.Show("Saisie bénéficiaire invalide",
+                MessageBox.Show("Saisie bénéficiaire invalide\nVeuillez entrez un N° de compte valide",
                     "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (!SqlRequests.EstBeneficiairePotentiel(idCompte))
             {
-                MessageBox.Show("Saisie bénéficiaire invalide",
+                MessageBox.Show("Saisie bénéficiaire invalide\nVeuillez entrez un N° de compte existant",
                     "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
