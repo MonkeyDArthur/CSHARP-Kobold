@@ -30,7 +30,8 @@ namespace Or.Pages
             {
                 if (transaction.TypeOperation == "Virement")
                 {
-                    transaction.TypeOperation = transaction.Montant < 0 ? "Virement\nsortant" : "Virement\nentrant";
+                    // Pas nécessaire
+                    //transaction.TypeOperation = transaction.Montant < 0 ? "Virement\nsortant" : "Virement\nentrant";
                 }
             }
                 // INSERTION DES DONNEES DANS LE TABLEAU D'AFFICHAGE
