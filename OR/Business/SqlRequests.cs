@@ -3,6 +3,7 @@ using Or.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Or.Business
 {
@@ -11,6 +12,7 @@ namespace Or.Business
         static readonly string fileDb = "BaseAppBancaire.db";
 
         static readonly string queryComptesDispo = "SELECT IdtCpt, NumCarte, Solde, TypeCompte FROM COMPTE WHERE NOT IdtCpt=@IdtCpt";
+        static readonly string queryCompte = "SELECT IdtCpt, NumCarte, Solde, TypeCompte FROM COMPTE WHERE IdtCpt=@IdtCpt";
 
         static readonly string queryComptesCarte = "SELECT IdtCpt, NumCarte, Solde, TypeCompte FROM COMPTE WHERE NumCarte=@Carte";
         static readonly string queryTransacCompte = "SELECT IdtTransaction, Horodatage, Montant, CptExpediteur, CptDestinataire, Statut FROM \"TRANSACTION\" WHERE Statut = 'O' AND (CptExpediteur=@IdtCptEx OR CptDestinataire=@IdtCptDest)";
@@ -52,7 +54,25 @@ namespace Or.Business
         }
         public static List<Compte> ListeComptesDispoAvecBeneficiaires(int idCompteExpediteur, long numCarte)
         {
-            List<Compte> liste = new List<Compte>();
+            List<Compte> comptesARetourner = new List<Compte>();
+            List<BeneficiaireVue> beneficiaireVues = ListeBeneficiairesAssocieClient(numCarte);
+
+            // On ajoute déjà les comptes bénéficiaires
+            foreach (var beneficiaire in beneficiaireVues)
+            {
+                var compte = InfosCompte(beneficiaire.IdCompte);
+                if (compte != null)
+                {
+                    comptesARetourner.Add(compte);
+                }
+            }
+
+            // On ajoute les comptes qui ne sont pas le compte Expéditeur 
+            comptesARetourner.AddRange(ListeComptesAssociesCarte(numCarte).Where(x => x.Id != idCompteExpediteur).ToList());
+
+            return comptesARetourner;
+
+            /*List<Compte> liste = new List<Compte>();
             string connectionString = ConstructionConnexionString(fileDb);
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -72,7 +92,7 @@ namespace Or.Business
                     }
                 }
             }
-            return liste;
+            return liste;*/
         }
         public static void AjoutBeneficiaire(long numCarte, int idtCpt)
         {
@@ -148,6 +168,47 @@ namespace Or.Business
                 }
             }
             return isBeneficiaire;
+        }
+
+        /// <summary>
+        /// Obtention des infos d'un compte
+        /// </summary>
+        /// <param name="numCarte"></param>
+        /// <returns></returns>
+        public static Compte InfosCompte(int idtCpt)
+        {
+            Compte compte = null;
+
+            string connectionString = ConstructionConnexionString(fileDb);
+
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (var command = new SqliteCommand(queryCompte, connection))
+                {
+                    command.Parameters.AddWithValue("@IdtCpt", idtCpt);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        int idt;
+                        long carte;
+                        decimal solde;
+                        string typeCompte;
+                        if (reader.Read())
+                        {
+                            idt = reader.GetInt32(0);
+                            carte = reader.GetInt64(1);
+                            solde = reader.GetDecimal(2);
+                            typeCompte = reader.GetString(3);
+
+                            compte = new Compte(idt, carte, typeCompte == "Courant" ? TypeCompte.Courant : TypeCompte.Livret, solde);
+                        }
+                    }
+                }
+
+                return compte;
+            }
         }
 
         /// <summary>
